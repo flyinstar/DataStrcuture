@@ -1,0 +1,4 @@
+pointer->something == (*pointer).something
+指针变量占用的内存大小是一样的，而指针指向的对象占用的大小不一定一样
+type* pointer;仅声明了一个指针变量
+type* pointer = new type;不仅声明了一个指针变量，还申请了一块内存空间

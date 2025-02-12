@@ -1,0 +1,12 @@
+Node* prev = head;
+for(int i = 1; i < position && prev->next; i++)
+{
+    prev = prev->next;
+}
+这种遍历方式溢出时prev为最后一个有效节点，可以访问prev
+Node* prev = head;
+for(int i = 1; i < position && prev; i++)
+{
+    prev = prev->next;
+}
+这种遍历方式溢出时prev为空指针，prev不可访问

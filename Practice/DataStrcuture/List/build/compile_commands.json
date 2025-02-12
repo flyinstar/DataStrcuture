@@ -1,0 +1,14 @@
+[
+{
+  "directory": "D:/Code/DataStrcuture/List/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe   -g -o CMakeFiles\\List.dir\\TestForLinkList.cpp.obj -c D:\\Code\\DataStrcuture\\List\\TestForLinkList.cpp",
+  "file": "D:/Code/DataStrcuture/List/TestForLinkList.cpp",
+  "output": "CMakeFiles/List.dir/TestForLinkList.cpp.obj"
+},
+{
+  "directory": "D:/Code/DataStrcuture/List/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe   -g -o CMakeFiles\\List.dir\\LinkList.cpp.obj -c D:\\Code\\DataStrcuture\\List\\LinkList.cpp",
+  "file": "D:/Code/DataStrcuture/List/LinkList.cpp",
+  "output": "CMakeFiles/List.dir/LinkList.cpp.obj"
+}
+]
