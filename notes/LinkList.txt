@@ -4,9 +4,14 @@ for(int i = 1; i < position && prev->next; i++)
     prev = prev->next;
 }
 这种遍历方式溢出时prev为最后一个有效节点，可以访问prev
+
 Node* prev = head;
 for(int i = 1; i < position && prev; i++)
 {
     prev = prev->next;
 }
 这种遍历方式溢出时prev为空指针，prev不可访问
+
+Insert(position) 的非法条件是 position < 1 || position > length + 1
+因为 Insert() 需要能在末尾插入节点
+其他查找函数则不应该使 position > length

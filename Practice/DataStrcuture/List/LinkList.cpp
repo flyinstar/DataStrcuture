@@ -1,41 +1,56 @@
 #include "LinkList.hpp"
 
-LinkList::LinkList(): head(nullptr),tail(nullptr) {}
+LinkList::LinkList(const LinkList& other) : head(nullptr), tail(nullptr), length(0) {
+    Node* current = other.head;
+    while (current) {
+        InsertAtTail(current->data);
+        current = current->next;
+    }
+}
+
+LinkList& LinkList::operator=(const LinkList& other) {
+    if (this == &other) {
+        return *this;
+    }
+    ClearLinkList();
+    Node* current = other.head;
+    while (current) {
+        InsertAtTail(current->data);
+        current = current->next;
+    }
+    return *this;
+}
 
 bool LinkList::IsEmpty() {
     return head == nullptr;
 }
 
 int LinkList::Lenth() {
-    int len = 0;
-    Node* prev = head;
-    while (prev) {
-        len++;
-        prev = prev->next;
-    }
-    return len;
+    return length;
 }
 
 void LinkList::Insert(int position, datatype data) {
-    if (position < 1 || position > Lenth() + 1) {
-        std::cout << "illegal argument" << std::endl;
+    if (position < 1 || position > length + 1) {
+        std::cout << "illegal position" << std::endl;
         return;
     }
     Node* newNode = new Node{data,nullptr};
     if (position == 1) {
-        if (head == nullptr) {
-            tail = newNode;
-        }
         newNode->next = head;
         head = newNode;
-        return;
+        if (!tail) tail = newNode;
+    } else {
+        Node* prev = head;
+        for (int i = 1; i < position - 1; i++) {
+            prev = prev->next;
+        }
+        newNode->next = prev->next;
+        prev->next = newNode;
+        if (newNode->next == nullptr) {
+            tail = newNode;
+        }
     }
-    Node* prev = head;
-    for (int i = 1; i < position - 1; i++) {
-        prev = prev->next;
-    }
-    newNode->next = prev->next;
-    prev->next = newNode;
+    length++;
 }
 
 void LinkList::InsertAtHead(datatype data) {
@@ -44,64 +59,71 @@ void LinkList::InsertAtHead(datatype data) {
         tail = newNode;
     }
     head = newNode;
+    length++;
 }
 
 void LinkList::InsertAtTail(datatype data) {
     Node* newNode = new Node{data, nullptr};
     if(head == nullptr) {
         head = tail = newNode;
-        return;
+    } else {
+        tail->next = newNode;
+        tail = newNode;
     }
-    tail->next = newNode;
-    tail = newNode;
+    length++;
 }
 
 void LinkList::Delete(int position) {
-    if (head == nullptr) {
-        std::cout << "List is empty" << std::endl;
-        return;
-    }
-    if (position < 1 || position > Lenth()) {
+    if (position < 1 || position > length) {
         std::cout << "illegal argument" << std::endl;
         return;
     }
     if (position == 1) {
-        Node* temp = head;
+        Node* toDelete = head;
         head = head->next;
-        delete temp;
-        return;
+        delete toDelete;
+    } else {
+        Node* prev = head;
+        for (int i = 1; i < position - 1 && prev->next; i++) {
+            prev = prev->next;
+        }
+        Node* toDelete = prev->next;
+        prev->next = toDelete->next;
+        if (toDelete == tail) {
+            tail = prev;
+        }
+        delete toDelete;
     }
-    Node* prev = head;
-    for (int i = 1; i < position - 1 && prev->next; i++) {
-        prev = prev->next;
-    }
-    if (prev->next == nullptr) {
-        std::cout << "Not find" << std::endl;
-        return;
-    }
-    Node* toDelete = prev->next;
-    prev->next = toDelete->next;
-    delete toDelete;
+    length--;
 }
 
 void LinkList::ClearLinkList() {
     while (head) {
-        Node* temp = head;
+        Node* toDelete = head;
         head = head->next;
-        delete temp;
+        delete toDelete;
     }
     tail = nullptr;
+    length = 0;
 }
 
-void LinkList::PrintTailNode() {
-    if (tail) {
-        std::cout << "Tail is " << tail->data << std::endl;
-    } else {
-        std::cout << "Tail is nullptr" << std::endl;
+void LinkList::ReWrite(int position, datatype data) {
+    if (head == nullptr) {
+        std::cout << "List is empty" << std::endl;
+        return;
     }
+    if (position < 1 || position > length) {
+        std::cout << "illegal argument" << std::endl;
+        return;
+    }
+    Node* prev = head;
+    for (int i = 1; i < position; i++) {
+        prev = prev->next;
+    }
+    prev->data = data;
 }
 
-void LinkList::Search(datatype data) {
+void LinkList::Search(datatype data) const{
     bool find = false;
     int i = 0;
     Node* prev = head;
@@ -120,43 +142,26 @@ void LinkList::Search(datatype data) {
     }
 }
 
-void LinkList::ReWrite(int position, datatype data) {
+bool LinkList::GetData(int position, datatype& result) const {
     if (head == nullptr) {
         std::cout << "List is empty" << std::endl;
-        return;
+        return false;
     }
-    if (position < 1 || position > Lenth() + 1) {
-        std::cout << "illegal argument" << std::endl;
-        return;
+
+    if (position < 1 || position > length) {
+        std::cout << "illegal position" << std::endl;
+        return false;
     }
+    
     Node* prev = head;
     for (int i = 1; i < position; i++) {
         prev = prev->next;
     }
-    prev->data = data;
+    result = prev->data;
+    return true;
 }
 
-void LinkList::GetData(int position, datatype& result) {
-    result = GetData(position);
-}
-
-datatype LinkList::GetData(int position) {
-    if (head == nullptr) {
-        std::cout << "List is empty" << std::endl;
-        return -1;
-    }
-    if (position < 1 || position > Lenth() + 1) {
-        std::cout << "illegal argument" << std::endl;
-        return -1;
-    }
-    Node* prev = head;
-    for (int i = 1; i < position; i++) {
-        prev = prev->next;
-    }
-    return prev->data;
-}
-
-void LinkList::PrintLinkList() {
+void LinkList::PrintLinkList() const {
     if (head == nullptr) {
         std::cout << "List is empty" << std::endl;
         return;
@@ -170,8 +175,4 @@ void LinkList::PrintLinkList() {
         current = current->next;
     }
     std::cout << std::endl;
-}
-
-LinkList::~LinkList() {
-    ClearLinkList();
 }

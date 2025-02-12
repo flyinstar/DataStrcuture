@@ -12,20 +12,25 @@ private:
     };
     Node* head;
     Node* tail;
+    int length;
 public:
-    LinkList();
+    LinkList(): head(nullptr), tail(nullptr), length(0) {}
+    LinkList(const LinkList& other);
+    LinkList& operator=(const LinkList& other);
+    ~LinkList() {ClearLinkList();}
+
     bool IsEmpty();
     int Lenth();
+
     void Insert(int position, datatype data);
     void InsertAtHead(datatype data);
     void InsertAtTail(datatype data);
+
     void Delete(int position);
     void ReWrite(int position, datatype data);
     void ClearLinkList();
-    void PrintTailNode();
-    void Search(datatype data);
-    void GetData(int position, datatype& result);
-    datatype GetData(int position);
-    void PrintLinkList();
-    ~LinkList();
+
+    void Search(datatype data) const;
+    bool GetData(int position, datatype& result) const;
+    void PrintLinkList() const;
 };
