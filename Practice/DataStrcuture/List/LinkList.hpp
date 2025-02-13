@@ -26,11 +26,11 @@ public:
     void InsertAtHead(datatype data);
     void InsertAtTail(datatype data);
 
+    void Append(datatype data) {InsertAtTail(data);}
     void Delete(int position);
-    void ReWrite(int position, datatype data);
     void ClearLinkList();
-
     void Search(datatype data) const;
     bool GetData(int position, datatype& result) const;
     void PrintLinkList() const;
+    void ReWrite(int position, datatype data);
 };
