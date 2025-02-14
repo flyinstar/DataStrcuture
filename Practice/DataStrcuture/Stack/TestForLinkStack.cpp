@@ -1,4 +1,3 @@
-#include "LinkStack.hpp"
 #include "LinkStack.cpp"
 #include <ctime>
 #include <random>
@@ -6,7 +5,7 @@
 int main()
 {
     LinkStack<int> stack;
-    datatype temp;
+    int temp;
     std::default_random_engine e;
     std::uniform_int_distribution u(1,100);
     e.seed(time(0));

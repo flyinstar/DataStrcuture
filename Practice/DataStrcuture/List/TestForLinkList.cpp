@@ -1,4 +1,3 @@
-#include "LinkList.hpp"
 #include "LinkList.cpp"
 #include <ctime>
 #include <random>
@@ -7,7 +6,7 @@ int main()
 {
     LinkList list;
     std::default_random_engine e;
-    std::uniform_int_distribution<int> u(1,100);   
+    std::uniform_int_distribution<int> u(1,100);
     e.seed(time(0));
 
     // list.InsertAtHead(37);

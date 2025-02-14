@@ -1,8 +1,6 @@
 #pragma once
 #include <iostream>
 
-using datatype = int;
-
 template <typename T>
 class LinkStack
 {

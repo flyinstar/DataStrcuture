@@ -3,26 +3,29 @@
 
 using datatype = int;
 
-struct QueueNode
-{
-    datatype data;
-    QueueNode* next;
-};
-
+template <typename T>
 class LinkQueue
 {
 private:
+    struct QueueNode {
+        T data;
+        QueueNode* next;
+    };
     QueueNode* head;
     QueueNode* tail;
+    int length;
 public:
-    LinkQueue();
-    void IsEmpty();
-    void EnQueue(datatype data);
+    LinkQueue() : head(nullptr), tail(nullptr), length(0) {}
+    LinkQueue(const LinkQueue& other) = delete;
+    LinkQueue& operator=(const LinkQueue& other) = delete;
+    ~LinkQueue() { Clear(); }
+
+    bool IsEmpty() const { return length == 0; }
+    int Length() const { return length; }
+
+    void EnQueue(T data);
     void DeQueue();
-    void GetHead(datatype& data);
-    datatype GetHead();
-    int Lenth();
-    void PrintQueue();
-    void ClearQueue();
-    ~LinkQueue();
+    void GetHead(T& data) const;
+    void Print() const;
+    void Clear();
 };
