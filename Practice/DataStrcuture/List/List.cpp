@@ -50,7 +50,7 @@ void List<datatype>::Delete(int position) {
     for (int i = position; i < length; i++) {
         data[i - 1] = data[i];
     }
-    length--:
+    length--;
 }
 
 template <typename datatype>
@@ -86,6 +86,7 @@ void List<datatype>::ReWrite(int position, const datatype& value) {
 
 template <typename datatype>
 void List<datatype>::Print() const {
+    std::cout << "List: ";
     for (int i = 0; i < length; i++) {
         std::cout << data[i] << " ";
     }

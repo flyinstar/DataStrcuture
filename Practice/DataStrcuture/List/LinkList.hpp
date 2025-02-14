@@ -19,7 +19,7 @@ public:
     ~LinkList() {Clear();}
 
     bool IsEmpty() const {return head == nullptr;}
-    int Lenth() const {return length;}
+    int Length() const {return length;}
 
     void Insert(int position, datatype value);
     void InsertAtHead(datatype value);

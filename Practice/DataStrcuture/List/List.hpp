@@ -16,7 +16,7 @@ public:
 
     bool isEmpty() const { return length == 0; }
     bool isFull() const { return length == size; }
-    int length() const { return length; }
+    int Length() const { return length; }
 
     void Insert(int position, const datatype& value);
     void Delete(int position);

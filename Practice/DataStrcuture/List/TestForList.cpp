@@ -1,30 +1,28 @@
-#include "LinkList.cpp"
+#include "List.cpp"
 #include <ctime>
 #include <random>
 
 int main() 
 {
-    LinkList<int> list;
+    List<int> list(20), list2(40);
     std::default_random_engine e;
     std::uniform_int_distribution<int> u(1,100);
     e.seed(time(0));
 
-    // list.InsertAtHead(37);
-    // list.Insert(1,1);
-    for (int i = 0; i < 20; i++) {
-        // std::cout << list.Lenth() << ':';
-        list.InsertAtTail(u(e));
-        // std::cout << list.Lenth() << ' ';
-        // list.Print();
-    }
     for (int i = 0; i < 20 + 1; i++) {
-        list.Insert(2*i-1, 2*i-1);
-        // std::cout << list.Lenth() << ' ';
+        list.Insert(i, u(e));
     }
-    // std::cout << std::endl;
-    // list.Clear();
-    // std::cout << list.Lenth() << std::endl;
-    // list.Search(37);
+    list.Insert(7, 37);
+    list.Clear();
     list.Print();
-    std::cout << list.Lenth() << std::endl;
+    for (int i = 1; i < 40 + 1; i++) {
+        list2.Insert(i, u(e));
+    }
+    list2.Print();
+    list = list2;
+    list.Delete(1);
+    list.ReWrite(1, -1);
+    list.Search(-1);
+    list.Print();
+    std::cout << list.Length() << std::endl;
 }
