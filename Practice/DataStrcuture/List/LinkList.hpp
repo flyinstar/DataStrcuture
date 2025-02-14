@@ -1,8 +1,7 @@
 #pragma once
 #include <iostream>
 
-using datatype = int;
-
+template <typename datatype>
 class LinkList
 {
 private:
@@ -19,18 +18,18 @@ public:
     LinkList& operator=(const LinkList& other);
     ~LinkList() {Clear();}
 
-    bool IsEmpty();
-    int Lenth();
+    bool IsEmpty() const {return head == nullptr;}
+    int Lenth() const {return length;}
 
-    void Insert(int position, datatype data);
-    void InsertAtHead(datatype data);
-    void InsertAtTail(datatype data);
+    void Insert(int position, datatype value);
+    void InsertAtHead(datatype value);
+    void InsertAtTail(datatype value);
 
-    void Append(datatype data) {InsertAtTail(data);}
+    void Append(datatype value) {InsertAtTail(value);}
     void Delete(int position);
     void Clear();
-    void Search(datatype data) const;
+    void Search(datatype value) const;
     bool GetData(int position, datatype& result) const;
     void Print() const;
-    void ReWrite(int position, datatype data);
+    void ReWrite(int position, datatype value);
 };

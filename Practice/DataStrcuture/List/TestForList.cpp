@@ -4,7 +4,7 @@
 
 int main() 
 {
-    LinkList list;
+    LinkList<int> list;
     std::default_random_engine e;
     std::uniform_int_distribution<int> u(1,100);
     e.seed(time(0));

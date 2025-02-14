@@ -51,7 +51,8 @@
         "algorithm": "cpp",
         "optional": "cpp",
         "random": "cpp",
-        "vector": "cpp"
+        "vector": "cpp",
+        "list": "cpp"
     },
     "cmake.sourceDirectory": "D:/Code/DataStrcuture"
 }

@@ -1,6 +1,7 @@
 #include "LinkList.hpp"
 
-LinkList::LinkList(const LinkList& other) : head(nullptr), tail(nullptr), length(0) {
+template <typename datatype>
+LinkList<datatype>::LinkList(const LinkList& other) : head(nullptr), tail(nullptr), length(0) {
     Node* current = other.head;
     while (current) {
         InsertAtTail(current->data);
@@ -8,7 +9,8 @@ LinkList::LinkList(const LinkList& other) : head(nullptr), tail(nullptr), length
     }
 }
 
-LinkList& LinkList::operator=(const LinkList& other) {
+template <typename datatype>
+LinkList<datatype>& LinkList<datatype>::operator=(const LinkList<datatype>& other) {
     if (this == &other) {
         return *this;
     }
@@ -21,20 +23,13 @@ LinkList& LinkList::operator=(const LinkList& other) {
     return *this;
 }
 
-bool LinkList::IsEmpty() {
-    return head == nullptr;
-}
-
-int LinkList::Lenth() {
-    return length;
-}
-
-void LinkList::Insert(int position, datatype data) {
+template <typename datatype>
+void LinkList<datatype>::Insert(int position, datatype value) {
     if (position < 1 || position > length + 1) {
         std::cout << "illegal position" << std::endl;
         return;
     }
-    Node* newNode = new Node{data,nullptr};
+    Node* newNode = new Node{value,nullptr};
     if (position == 1) {
         newNode->next = head;
         head = newNode;
@@ -53,8 +48,9 @@ void LinkList::Insert(int position, datatype data) {
     length++;
 }
 
-void LinkList::InsertAtHead(datatype data) {
-    Node* newNode = new Node{data, head};
+template <typename datatype>
+void LinkList<datatype>::InsertAtHead(datatype value) {
+    Node* newNode = new Node{value, head};
     if (head == nullptr) {
         tail = newNode;
     }
@@ -62,8 +58,9 @@ void LinkList::InsertAtHead(datatype data) {
     length++;
 }
 
-void LinkList::InsertAtTail(datatype data) {
-    Node* newNode = new Node{data, nullptr};
+template <typename datatype>
+void LinkList<datatype>::InsertAtTail(datatype value) {
+    Node* newNode = new Node{value, nullptr};
     if(head == nullptr) {
         head = tail = newNode;
     } else {
@@ -73,7 +70,8 @@ void LinkList::InsertAtTail(datatype data) {
     length++;
 }
 
-void LinkList::Delete(int position) {
+template <typename datatype>
+void LinkList<datatype>::Delete(int position) {
     if (position < 1 || position > length) {
         std::cout << "illegal argument" << std::endl;
         return;
@@ -97,7 +95,8 @@ void LinkList::Delete(int position) {
     length--;
 }
 
-void LinkList::Clear() {
+template <typename datatype>
+void LinkList<datatype>::Clear() {
     while (head) {
         Node* toDelete = head;
         head = head->next;
@@ -107,7 +106,8 @@ void LinkList::Clear() {
     length = 0;
 }
 
-void LinkList::ReWrite(int position, datatype data) {
+template <typename datatype>
+void LinkList<datatype>::ReWrite(int position, datatype value) {
     if (head == nullptr) {
         std::cout << "List is empty" << std::endl;
         return;
@@ -120,16 +120,17 @@ void LinkList::ReWrite(int position, datatype data) {
     for (int i = 1; i < position; i++) {
         prev = prev->next;
     }
-    prev->data = data;
+    prev->data = value;
 }
 
-void LinkList::Search(datatype data) const{
+template <typename datatype>
+void LinkList<datatype>::Search(datatype value) const{
     bool find = false;
     int i = 0;
     Node* prev = head;
     while (prev) {
         i++;
-        if(prev->data == data) {
+        if(prev->data == value) {
             std::cout << "Find at position " << i << ": " << prev->data << std::endl;
             if(!find) {
                 find = true;
@@ -142,7 +143,8 @@ void LinkList::Search(datatype data) const{
     }
 }
 
-bool LinkList::GetData(int position, datatype& result) const {
+template <typename datatype>
+bool LinkList<datatype>::GetData(int position, datatype& result) const {
     if (head == nullptr) {
         std::cout << "List is empty" << std::endl;
         return false;
@@ -161,7 +163,8 @@ bool LinkList::GetData(int position, datatype& result) const {
     return true;
 }
 
-void LinkList::Print() const {
+template <typename datatype>
+void LinkList<datatype>::Print() const {
     if (head == nullptr) {
         std::cout << "List is empty" << std::endl;
         return;
