@@ -17,7 +17,7 @@ public:
     LinkList(): head(nullptr), tail(nullptr), length(0) {}
     LinkList(const LinkList& other);
     LinkList& operator=(const LinkList& other);
-    ~LinkList() {ClearLinkList();}
+    ~LinkList() {Clear();}
 
     bool IsEmpty();
     int Lenth();
@@ -28,9 +28,9 @@ public:
 
     void Append(datatype data) {InsertAtTail(data);}
     void Delete(int position);
-    void ClearLinkList();
+    void Clear();
     void Search(datatype data) const;
     bool GetData(int position, datatype& result) const;
-    void PrintLinkList() const;
+    void Print() const;
     void ReWrite(int position, datatype data);
 };

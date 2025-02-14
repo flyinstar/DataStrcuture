@@ -1,17 +1,17 @@
 #include "LinkStack.hpp"
 
-LinkStack::LinkStack() : top(nullptr) {}
-
-bool LinkStack::IsEmpty() {
+template <typename T>
+bool LinkStack<T>::IsEmpty() const {
     return top == nullptr;
 }
 
-void LinkStack::Push(datatype data) {
-    StackNode* newNode = new StackNode{data,top};
-    top = newNode;
+template <typename T>
+void LinkStack<T>::Push(T data) {
+    top = new StackNode{data,top};
 }
 
-void LinkStack::Pop(datatype& result) {
+template <typename T>
+void LinkStack<T>::Pop(T& result) {
     if (top == nullptr) {
         std::cout << "Stack is empty" << std::endl;
         return;
@@ -22,19 +22,18 @@ void LinkStack::Pop(datatype& result) {
     delete temp;
 }
 
-datatype LinkStack::Pop() {
+template <typename T>
+bool LinkStack<T>::GetTop(T& result) const {
     if (top == nullptr) {
-        std::cout << "Stack is empty(return with value -1)" << std::endl;
-        return -1;
+        std::cout << "Stack is empty" << std::endl;
+        return false;
     }
-    datatype result = top->data;
-    StackNode* temp = top;
-    top = top->next;
-    delete temp;
-    return result;
+    result = top->data;
+    return true;
 }
 
-void LinkStack::ClearLinkStack() {
+template <typename T>
+void LinkStack<T>::Clear() {
     StackNode* current = top;
     while (current) {
         StackNode* temp = current;
@@ -44,7 +43,8 @@ void LinkStack::ClearLinkStack() {
     top = nullptr;
 }
 
-void LinkStack::PrintLinkStack() {
+template <typename T>
+void LinkStack<T>::Print() const {
     std::cout << "top";
     if (top == nullptr) {
         std::cout << "->empty";
@@ -53,8 +53,4 @@ void LinkStack::PrintLinkStack() {
         std::cout << "->" << prev->data;
     }
     std::cout << std::endl;
-}
-
-LinkStack::~LinkStack() {
-    ClearLinkStack();
 }

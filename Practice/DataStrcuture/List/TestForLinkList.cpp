@@ -16,16 +16,16 @@ int main()
         // std::cout << list.Lenth() << ':';
         list.InsertAtTail(u(e));
         // std::cout << list.Lenth() << ' ';
-        // list.PrintLinkList();
+        // list.Print();
     }
     for (int i = 0; i < 20 + 1; i++) {
         list.Insert(2*i-1, 2*i-1);
         // std::cout << list.Lenth() << ' ';
     }
     // std::cout << std::endl;
-    // list.ClearLinkList();
+    // list.Clear();
     // std::cout << list.Lenth() << std::endl;
     // list.Search(37);
-    list.PrintLinkList();
+    list.Print();
     std::cout << list.Lenth() << std::endl;
 }

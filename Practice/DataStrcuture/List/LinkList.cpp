@@ -12,7 +12,7 @@ LinkList& LinkList::operator=(const LinkList& other) {
     if (this == &other) {
         return *this;
     }
-    ClearLinkList();
+    Clear();
     Node* current = other.head;
     while (current) {
         InsertAtTail(current->data);
@@ -97,7 +97,7 @@ void LinkList::Delete(int position) {
     length--;
 }
 
-void LinkList::ClearLinkList() {
+void LinkList::Clear() {
     while (head) {
         Node* toDelete = head;
         head = head->next;
@@ -161,7 +161,7 @@ bool LinkList::GetData(int position, datatype& result) const {
     return true;
 }
 
-void LinkList::PrintLinkList() const {
+void LinkList::Print() const {
     if (head == nullptr) {
         std::cout << "List is empty" << std::endl;
         return;
